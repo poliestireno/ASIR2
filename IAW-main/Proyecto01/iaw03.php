@@ -1,6 +1,4 @@
 
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +7,7 @@
     <title>Document</title>
 <style>
     .color{
-        background-color: purple;
+        background-color: greenyellow;
     }
 </style>
 </head>
@@ -28,9 +26,9 @@
         <li><?php echo $num4 ?> </li>
     </ul>
    <h2 class="color"> <?php 
-    echo "la suma de los numeros es: {$suma}"
-    // media
-    // mediana
+    echo "la suma de los numeros es: ".$suma;
+    $media = $suma/4;
+    echo "La media es:".$media;
     
     ?> </h2>
 </body>
