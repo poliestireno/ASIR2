@@ -7,7 +7,7 @@
 * Monitorizar y optimizar rendimiento
 * Gestionar alta disponibilidad: bases de datos distribuidas y replicadas
 
-[Documentación del curso](files/readme.md)
+[Documentación del curso](files/README.md)
 
 ### Proyectos
 * Sistemas Gestores de bases de datos Relacionales (SQL)
