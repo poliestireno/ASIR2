@@ -6,6 +6,9 @@
 * Automatizar tareas de administración con guiones
 * Monitorizar y optimizar rendimiento
 * Gestionar alta disponibilidad: bases de datos distribuidas y replicadas
+
+[Documentación del curso](files/readme.md)
+
 ### Proyectos
 * Sistemas Gestores de bases de datos Relacionales (SQL)
   * [MySQL](https://www.mysql.com/)
