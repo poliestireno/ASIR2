@@ -89,3 +89,115 @@ Puedes versionar tus imágenes Docker, lo que permite regresar a una versión an
 ## **Conclusión**
 
 Docker es una herramienta poderosa que mejora la eficiencia, portabilidad y escalabilidad de las aplicaciones. Es ideal tanto para desarrolladores como para administradores de sistemas que buscan simplificar la creación, despliegue y gestión de aplicaciones.
+
+
+### **Comandos básicos**
+
+### **2\. Verificar instalación de Docker**
+
+`docker --version`
+
+Muestra la versión instalada de Docker.
+
+---
+
+### **3\. Descargar una imagen**
+
+`docker pull <nombre_imagen>`
+
+`docker pull ubuntu`
+
+Descarga la imagen `ubuntu` desde Docker Hub.
+
+---
+
+### **4\. Listar imágenes locales**
+
+`docker images`
+
+Muestra todas las imágenes descargadas en el sistema.
+
+---
+
+### **5\. Crear y ejecutar un contenedor**
+
+`docker run <opciones> <imagen>`
+
+`docker run -it ubuntu`
+
+Ejecuta un contenedor interactivo de `ubuntu`.
+
+---
+
+### **6\. Listar contenedores activos**
+
+`docker ps`
+
+Muestra los contenedores en ejecución.
+
+---
+
+### **7\. Listar todos los contenedores (activos e inactivos)**
+
+`docker ps -a`
+
+Muestra todos los contenedores, incluso los detenidos.
+
+---
+
+### **8\. Detener un contenedor**
+
+`docker stop <id_contenedor>`
+
+Detiene un contenedor en ejecución. Puedes obtener el `<id_contenedor>` con `docker ps`.
+
+---
+
+### **9\. Eliminar un contenedor**
+
+`docker rm <id_contenedor>`
+
+Elimina un contenedor detenido.
+
+---
+
+### **10\. Eliminar una imagen**
+
+`docker rmi <id_imagen>`
+
+Elimina una imagen local. Puedes obtener el `<id_imagen>` con `docker images`.
+
+---
+
+### **11\. Ver logs de un contenedor**
+
+`docker logs <id_contenedor>`
+
+Muestra los logs generados por un contenedor.
+
+---
+
+### **12\. Acceder a un contenedor en ejecución**
+
+`docker exec -it <id_contenedor>` 
+
+Permite ejecutar un shell interactivo dentro del contenedor.
+
+---
+
+### **13\. Ver información general de Docker**
+
+### `docker info`
+
+Muestra detalles sobre la configuración y estado de Docker.
+
+---
+
+### **14\. Ver ayuda sobre un comando**
+
+`docker <comando> --help`
+
+`docker run --help`
+
+Muestra todas las opciones disponibles para el comando `run`.
+
