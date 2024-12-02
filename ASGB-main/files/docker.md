@@ -91,7 +91,7 @@ Puedes versionar tus imágenes Docker, lo que permite regresar a una versión an
 Docker es una herramienta poderosa que mejora la eficiencia, portabilidad y escalabilidad de las aplicaciones. Es ideal tanto para desarrolladores como para administradores de sistemas que buscan simplificar la creación, despliegue y gestión de aplicaciones.
 
 
-### **Comandos básicos**
+# **Comandos básicos**
 
 ### **2\. Verificar instalación de Docker**
 
@@ -200,4 +200,75 @@ Muestra detalles sobre la configuración y estado de Docker.
 `docker run --help`
 
 Muestra todas las opciones disponibles para el comando `run`.
+
+
+
+
+# **Aplicación `hello-world` con Docker**
+
+Pasos detallados para descargar y ejecutar la imagen `hello-world` con Docker:
+
+---
+
+### **1\. Verificar que Docker está instalado**
+
+Asegúrate de que Docker está instalado y funcionando en tu sistema. Para comprobarlo, ejecuta:
+
+`docker --version`
+
+Si no está instalado, consulta la documentación oficial de Docker para instalarlo según tu sistema operativo.
+
+---
+
+### **2\. Descargar y ejecutar la imagen `hello-world`**
+
+La imagen `hello-world` es una de las más básicas en Docker. Puedes descargarla y ejecutarla directamente con el siguiente comando:
+
+`docker run hello-world`
+
+Este comando realiza lo siguiente:
+
+1. **Verifica si la imagen `hello-world` está disponible localmente**.  
+2. Si no está presente, la descargará automáticamente desde Docker Hub.  
+3. **Crea y ejecuta un contenedor** basado en esa imagen.  
+4. **Muestra un mensaje de bienvenida en la terminal**.
+
+---
+
+### **3\. Verificar las imágenes locales**
+
+Una vez que la imagen ha sido descargada, puedes verificar que está disponible localmente con:
+
+`docker images`
+
+Esto mostrará un listado de todas las imágenes descargadas en tu sistema, incluyendo `hello-world`.
+
+---
+
+### **4\. Ver contenedores creados**
+
+Para ver el contenedor que se creó y ejecutó, usa:
+
+`docker ps -a`
+
+Este comando muestra todos los contenedores, incluso los que han finalizado su ejecución.
+
+---
+
+### **5\. Eliminar el contenedor (opcional)**
+
+Si ya no necesitas el contenedor, puedes eliminarlo para liberar espacio:
+
+`docker rm <id_contenedor>`
+
+Reemplaza `<id_contenedor>` con el ID o nombre del contenedor que aparece en `docker ps -a`.
+
+---
+
+### **6\. Eliminar la imagen (opcional)**
+
+Si ya no necesitas la imagen `hello-world`, puedes eliminarla con:
+
+`docker rmi hello-world`
+
 
