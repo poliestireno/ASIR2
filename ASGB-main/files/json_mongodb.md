@@ -296,3 +296,158 @@ Consulta los animales asociados a cada árbol usando agregación:
  
 
 ---
+
+### **¿Para qué sirve `$lookup`?**
+
+1. **Unir datos de colecciones diferentes**: Por ejemplo, relacionar documentos de una colección de usuarios con una colección de pedidos.  
+2. **Simular relaciones entre documentos**: MongoDB no tiene un esquema relacional estricto, pero `$lookup` permite consultar datos como si existieran relaciones predefinidas.  
+3. **Optimizar consultas complejas**: Traer datos relacionados en una sola consulta en lugar de hacer múltiples consultas individuales.
+
+---
+
+### **Ejemplo práctico**
+
+#### **Caso: Biblioteca y libros**
+
+Queremos construir una consulta que muestre las bibliotecas con los libros que tienen disponibles.
+
+#### **Colección `libraries`:**
+
+Copiar código  
+`db.libraries.insertMany([`  
+  `{ _id: 1, name: "Biblioteca Central", location: "Madrid" },`  
+  `{ _id: 2, name: "Biblioteca Regional", location: "Barcelona" }`  
+`])`
+
+#### **Colección `books`:**
+
+Copiar código  
+`db.books.insertMany([`  
+  `{ title: "Cien Años de Soledad", author: "Gabriel García Márquez", library_id: 1 },`  
+  `{ title: "Don Quijote de la Mancha", author: "Miguel de Cervantes", library_id: 1 },`  
+  `{ title: "La Sombra del Viento", author: "Carlos Ruiz Zafón", library_id: 2 }`  
+`])`
+
+---
+
+### **Consulta con `$lookup`**
+
+Usamos `$lookup` para combinar las bibliotecas con sus libros:
+
+`db.libraries.aggregate([`  
+  `{`  
+    `$lookup: {`  
+      `from: "books",            // Colección con la que unir`  
+      `` localField: "_id",        // Campo en la colección `libraries` ``  
+      `` foreignField: "library_id", // Campo en la colección `books` ``  
+      `as: "available_books"     // Nombre del campo para los datos combinados`  
+    `}`  
+  `}`  
+`])`
+
+#### **Resultado esperado:**
+
+`[`  
+  `{`  
+    `"_id": 1,`  
+    `"name": "Biblioteca Central",`  
+    `"location": "Madrid",`  
+    `"available_books": [`  
+      `{`  
+        `"title": "Cien Años de Soledad",`  
+        `"author": "Gabriel García Márquez",`  
+        `"library_id": 1`  
+      `},`  
+      `{`  
+        `"title": "Don Quijote de la Mancha",`  
+        `"author": "Miguel de Cervantes",`  
+        `"library_id": 1`  
+      `}`  
+    `]`  
+  `},`  
+  `{`  
+    `"_id": 2,`  
+    `"name": "Biblioteca Regional",`  
+    `"location": "Barcelona",`  
+    `"available_books": [`  
+      `{`  
+        `"title": "La Sombra del Viento",`  
+        `"author": "Carlos Ruiz Zafón",`  
+        `"library_id": 2`  
+      `}`  
+    `]`  
+  `}`  
+`]`
+
+---
+
+### **Explicación de la consulta**
+
+1. **`$lookup`**:  
+   * Toma cada documento en `libraries`.  
+   * Busca documentos en la colección `books` donde el valor de `library_id` en `books` coincida con el valor de `_id` en `libraries`.  
+   * Los resultados de esta coincidencia se almacenan en el campo `available_books`.  
+2. **Campo `as`**:  
+   * Especifica el nombre del campo que contendrá los datos relacionados.  
+3. **Relación 1:N**:  
+   * Una biblioteca puede tener varios libros. Por eso, `available_books` contiene un arreglo con todos los libros asociados.
+
+---
+
+### **Ejemplo más complejo: Agregar proyecciones**
+
+Si queremos limitar los datos de los libros (por ejemplo, excluir el campo `library_id`), podemos usar `$project`:
+
+javascript  
+Copiar código  
+`db.libraries.aggregate([`  
+  `{`  
+    `$lookup: {`  
+      `from: "books",`  
+      `localField: "_id",`  
+      `foreignField: "library_id",`  
+      `as: "available_books"`  
+    `}`  
+  `},`  
+  `{`  
+    `$project: {`  
+      `name: 1,`  
+      `location: 1,`  
+      `"available_books.title": 1,`  
+      `"available_books.author": 1`  
+    `}`  
+  `}`  
+`])`
+
+#### **Resultado esperado:**
+
+json  
+Copiar código  
+`[`  
+  `{`  
+    `"_id": 1,`  
+    `"name": "Biblioteca Central",`  
+    `"location": "Madrid",`  
+    `"available_books": [`  
+      `{ "title": "Cien Años de Soledad", "author": "Gabriel García Márquez" },`  
+      `{ "title": "Don Quijote de la Mancha", "author": "Miguel de Cervantes" }`  
+    `]`  
+  `},`  
+  `{`  
+    `"_id": 2,`  
+    `"name": "Biblioteca Regional",`  
+    `"location": "Barcelona",`  
+    `"available_books": [`  
+      `{ "title": "La Sombra del Viento", "author": "Carlos Ruiz Zafón" }`  
+    `]`  
+  `}`  
+`]`
+
+---
+
+### **¿Cuándo usar `$lookup`?**
+
+1. **Datos relacionados distribuidos en colecciones diferentes**.  
+2. **Necesidad de reducir el número de consultas**.  
+3. **Generación de reportes o vistas combinada**
+
