@@ -141,7 +141,6 @@ Inserta un documento en la colección `ecological_classifications`:
 
 
 Relaciona el árbol "Roble" con esta clasificación:  
-javascript
 
 `db.trees.updateOne(`
 
@@ -154,7 +153,6 @@ javascript
 
 
 Consulta la relación usando `lookup`:  
-javascript
 
 `db.trees.aggregate([`
 
