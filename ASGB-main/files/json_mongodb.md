@@ -117,6 +117,80 @@ Esto seleccionará (o creará, si no existe) la base de datos llamada `arboles`.
 
 `db.trees.find({ scientific_name: "Pinus sylvestris" })`
 
+### **Operadores de comparación**
+
+* **`$eq`**: Igualdad (`campo == valor`).  
+* **`$ne`**: Diferencia (`campo != valor`).  
+* **`$gt`**: Mayor que (`campo > valor`).  
+* **`$gte`**: Mayor o igual que (`campo >= valor`).  
+* **`$lt`**: Menor que (`campo < valor`).  
+* **`$lte`**: Menor o igual que (`campo <= valor`).  
+* **`$in`**: Contiene al menos uno de los valores especificados.  
+* **`$nin`**: No contiene ninguno de los valores especificados.
+
+---
+
+### **Operadores lógicos**
+
+**`$and`**: Combina múltiples condiciones, todas deben cumplirse.
+
+`{ $and: [{ campo1: 50 }, { campo2: { $gt: 20 } }] }`  
+**`$or`**: Combina múltiples condiciones, al menos una debe cumplirse.
+
+`{ $or: [{ campo1: 50 }, { campo2: { $gt: 20 } }] }`  
+**`$not`**: Niega una condición.
+
+`{ campo: { $not: { $gt: 50 } } }`  
+**`$nor`**: Ninguna de las condiciones especificadas puede cumplirse.
+
+`{ $nor: [{ campo1: 50 }, { campo2: { $gt: 20 } }] }`
+
+---
+
+### **Operadores de elementos**
+
+**`$exists`**: Verifica si un campo existe o no.
+
+`{ campo: { $exists: true } }`  
+**`$type`**: Filtra documentos por el tipo de datos de un campo.
+
+`{ campo: { $type: "string" } }`  
+---
+
+### **Operadores de evaluación**
+
+**`$regex`**: Busca coincidencias usando expresiones regulares.
+
+`{ campo: { $regex: /^texto/i } }`  
+**`$expr`**: Permite usar expresiones de agregación dentro de las consultas.
+
+`{ $expr: { $gt: ["$campo1", "$campo2"] } }`  
+**`$mod`**: Verifica si un valor dividido por un divisor tiene un residuo específico.
+
+`{ campo: { $mod: [4, 0] } } // Múltiplos de 4`  
+**`$text`**: Busca coincidencias en índices de texto.
+
+`{ $text: { $search: "palabra clave" } }`  
+**`$where`**: Usa  para filtrar documentos (no recomendado por razones de rendimiento).
+
+`{ $where: "this.campo1 > this.campo2" }`  
+---
+
+### **Operadores de matrices**
+
+**`$all`**: Verifica que un campo de tipo array contenga todos los valores especificados.
+
+`{ campo: { $all: [1, 2, 3] } }`  
+**`$elemMatch`**: Verifica si al menos un elemento en un array cumple varias condiciones.
+
+`{ campo: { $elemMatch: { subcampo1: 50, subcampo2: { $gte: 20 } } } }`  
+**`$size`**: Verifica el tamaño de un array.
+
+`{ campo: { $size: 3 } }`  
+**`$slice`**: Recupera una porción de un array (se usa en proyecciones).
+
+`db.coleccion.find({}, { campo: { $slice: 2 } }) // Primeros 2 elementos`
+
 ---
 
 ## **4\. Relaciones entre documentos**
