@@ -1,0 +1,18 @@
+{
+    "name": "Alice",
+    "age": 30,
+    "email": "alice@example.com",
+    "skills": ["JavaScript", "Python", "SQL"],
+    "n_shoes": [40,41,43],
+    "address": {
+                    "street": 
+                    {
+                        "calle": "Valle Inclán",
+                        "numero": 67,
+                        "piso":4,
+                        "puerta": "c"
+                    },
+                    "city": "Springfield",
+                    "zip": "12345"
+        }
+}
