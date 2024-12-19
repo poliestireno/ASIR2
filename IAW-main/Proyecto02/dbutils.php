@@ -7,7 +7,7 @@ function conectarDB(): PDO
     return $db;
 }
 
-function realizarQuery($conexion,$texto,$argumentos=null,$isfetch=false): mixed
+function realizarQuery($conexion,$texto,$argumentos=null,$isfetch=false)
 {
     $comand=$conexion->prepare($texto);
     $comand->execute($argumentos);

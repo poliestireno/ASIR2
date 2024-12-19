@@ -13,10 +13,6 @@ realizarQuery($miCon,"SELECT * FROM POLVORONES",null,isfetch: true);
 
 
 
-realizarQuery($miCon,"SELECT * FROM POLVORONES",null,isfetch: true);
-
-
-
 ?>
 
 <!DOCTYPE html>
