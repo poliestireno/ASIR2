@@ -1,8 +1,10 @@
 <?php
-
+session_start();
 require_once("dbutils.php");
-
+echo "POST:";
 var_export($_POST);
+echo "SESSION:";
+var_export($_SESSION);
 
 // COMPROBAR SI EXISTE user y pass 
 if (isset($_POST["login_button"]))
@@ -16,6 +18,7 @@ if (isset($_POST["login_button"]))
     $results = realizarQuery($miCon,$query,$argumentos,true);
     if ($results)
     {
+        $_SESSION['user_ok']=$_POST['user'];
         // logado correctamente
         header("Location: app.php");
         exit;
@@ -25,7 +28,6 @@ if (isset($_POST["login_button"]))
         // volver al login
 
     }
-    meter sesiones
 }
 
 

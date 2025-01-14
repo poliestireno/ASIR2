@@ -2,9 +2,6 @@
 require_once("header.php");
 ?>
 
-
-ENHORABUENA, TE HAS LOGADO CORRECTAMENTE
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,6 +10,9 @@ ENHORABUENA, TE HAS LOGADO CORRECTAMENTE
     <title>Document</title>
 </head>
 <body>
-    <a href="app2.php">APP2</a>
+    <form action="logout.php" method="post">
+
+        <input type="submit" name="bo_out" value="LOGOUT">
+    </form>
 </body>
 </html>
